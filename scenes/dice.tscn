@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://lj052lebv25p"]
+
+[ext_resource type="Script" uid="uid://b2byc18b8cmil" path="res://scenes/dice.gd" id="1_pb8pk"]
+[ext_resource type="Texture2D" uid="uid://b3pb7vq22oufl" path="res://assets/dice/dice_01_normal.png" id="1_tannu"]
+[ext_resource type="Texture2D" uid="uid://db10crt13nky2" path="res://assets/dice/dice_02_normal.png" id="2_pb8pk"]
+[ext_resource type="Texture2D" uid="uid://dy5pabg1ujn3y" path="res://assets/dice/dice_01_shield.png" id="3_4kp1s"]
+[ext_resource type="Texture2D" uid="uid://mpk7rlugm2wg" path="res://assets/dice/dice_03_normal.png" id="3_ocjtb"]
+[ext_resource type="Texture2D" uid="uid://bn2dfq2e1ykal" path="res://assets/dice/dice_04_normal.png" id="4_dicg2"]
+[ext_resource type="Texture2D" uid="uid://1x85yspxetfb" path="res://assets/dice/dice_02_shield.png" id="5_nkpnt"]
+[ext_resource type="Texture2D" uid="uid://hcn50npwjlm0" path="res://assets/dice/dice_05_normal.png" id="5_pgf55"]
+[ext_resource type="Texture2D" uid="uid://cry7phwm24nm4" path="res://assets/dice/dice_06_normal.png" id="6_dlvbc"]
+[ext_resource type="Texture2D" uid="uid://bri6ror4gc2e3" path="res://assets/dice/dice_03_shield.png" id="7_mvkvt"]
+[ext_resource type="Texture2D" uid="uid://bmwmjccipfm5" path="res://assets/dice/dice_04_shield.png" id="9_qxx4u"]
+[ext_resource type="Texture2D" uid="uid://bvotcwoatjb5k" path="res://assets/dice/dice_05_shield.png" id="11_v1png"]
+[ext_resource type="Texture2D" uid="uid://x1n1n7qmo33x" path="res://assets/dice/dice_06_shield.png" id="13_14loa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_skxya"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tannu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4kp1s")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pb8pk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nkpnt")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ocjtb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mvkvt")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dicg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_qxx4u")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_pgf55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_v1png")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_dlvbc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_14loa")
+}],
+"loop": true,
+"name": &"6",
+"speed": 5.0
+}]
+
+[node name="Dice" type="Node2D"]
+script = ExtResource("1_pb8pk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_skxya")
+animation = &"6"

@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1ghn6loy26ls"]
+
+[ext_resource type="Texture2D" uid="uid://bn8hxxkqucemu" path="res://assets/gui/hp_bar_under.png" id="1_6bv7e"]
+[ext_resource type="Script" uid="uid://ceavndhf20lf8" path="res://scenes/hp_bar.gd" id="1_hb236"]
+[ext_resource type="Texture2D" uid="uid://b7k1spln2cg62" path="res://assets/gui/hp_bar_shield.png" id="2_hb236"]
+[ext_resource type="Texture2D" uid="uid://dbyq0js7lk03l" path="res://assets/gui/hp_bar_health.png" id="3_mg587"]
+[ext_resource type="Texture2D" uid="uid://b0p15cs36x5l7" path="res://assets/gui/hp_bar_decor.png" id="5_mg587"]
+
+[node name="hp_bar" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8, 8)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_hb236")
+
+[node name="HpBarUnder" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_under = ExtResource("1_6bv7e")
+
+[node name="HpBarShield" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_progress = ExtResource("2_hb236")
+
+[node name="HpBarHealth" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -6.0
+offset_right = 55.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_progress = ExtResource("3_mg587")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -79.875
+offset_top = -57.25
+offset_right = -31.875
+offset_bottom = -9.25
+texture = ExtResource("5_mg587")

@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsipr0nho5l71"]
+
+[ext_resource type="Shader" uid="uid://b0tfo44iae14p" path="res://shaders/bg_shader.gdshader" id="1_anprf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dpp0m"]
+shader = ExtResource("1_anprf")
+shader_parameter/variant = 1.1
+shader_parameter/distortion = 1.0
+shader_parameter/seed = 0.01
+shader_parameter/stretch = Vector3(3, 3, 3)
+shader_parameter/pattern = 5.0
+shader_parameter/blur = 2.0
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dpp0m")
+layout_mode = 0
+offset_right = 20000.0
+offset_bottom = 20000.0
