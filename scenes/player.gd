@@ -1,5 +1,7 @@
 extends Entity
 
+@onready var dice_selection: Control = %DiceSelection
+
 
 func _physics_process(delta: float) -> void:
 	if idle:

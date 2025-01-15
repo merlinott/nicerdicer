@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ehgcylhh3ww8"]
+[gd_scene load_steps=16 format=3 uid="uid://ehgcylhh3ww8"]
 
 [ext_resource type="Script" uid="uid://dn0dwmkaeyku4" path="res://scenes/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dgd0to27ulspj" path="res://assets/shaddow.png" id="2_qhqgy"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://4vw3yc8f3ldy" path="res://assets/shield.png" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://c6k6dknha5jwg" path="res://scenes/damage_numbers.tscn" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://b1ghn6loy26ls" path="res://scenes/hp_bar.tscn" id="7_fjrip"]
+[ext_resource type="PackedScene" uid="uid://dsw8luwju64pn" path="res://scenes/cards_ui.tscn" id="8_smehm"]
+[ext_resource type="PackedScene" uid="uid://cx2rv6ej2x3dk" path="res://scenes/dice_selection_ui.tscn" id="9_ur7pv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 264.613
@@ -258,6 +260,7 @@ shape = SubResource("CircleShape2D_qhqgy")
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
 zoom = Vector2(0.1, 0.1)
+position_smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -308,3 +311,13 @@ theme_override_font_sizes/font_size = 222
 text = "6"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Cards" parent="CanvasLayer2" instance=ExtResource("8_smehm")]
+visible = false
+size_flags_vertical = 8
+
+[node name="DiceSelection" parent="CanvasLayer2" instance=ExtResource("9_ur7pv")]
+unique_name_in_owner = true
+visible = false

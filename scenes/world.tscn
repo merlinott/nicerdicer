@@ -46,7 +46,6 @@ zoom = Vector2(0.06, 0.06)
 position = Vector2(663, -1168)
 
 [node name="player" parent="EnemyContainer" instance=ExtResource("4_k0juu")]
-position = Vector2(-72, 0)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

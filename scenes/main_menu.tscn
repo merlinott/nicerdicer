@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://g72n6qgvel16"]
+
+[ext_resource type="Texture2D" uid="uid://dw602tyom8s4c" path="res://assets/menu_ui/bg_v1.png" id="1_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://uvnqf4wae7g5" path="res://assets/menu_ui/start_button.png" id="2_bqqt6"]
+[ext_resource type="Script" uid="uid://4rbtdr8ojnok" path="res://ui_animation_component.gd" id="3_8ln24"]
+[ext_resource type="PackedScene" uid="uid://ehgcylhh3ww8" path="res://scenes/player.tscn" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://bg3w26ehmu87a" path="res://assets/char_01.png" id="4_wu84c"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ekxnf")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 84.0
+offset_right = 634.0
+offset_bottom = 236.0
+texture = ExtResource("2_bqqt6")
+
+[node name="Node" type="Node" parent="TextureRect2"]
+script = ExtResource("3_8ln24")
+from_center = true
+gui_input_fadeout = true
+hover_scale = Vector2(1.1, 1.1)
+transition_type = 7
+
+[node name="player2" parent="." instance=ExtResource("3_bqqt6")]
+position = Vector2(1124, 474)
+scale = Vector2(0.32, 0.32)
+script = null
+
+[node name="Sprite2D" parent="player2" index="1"]
+texture = ExtResource("4_wu84c")
+
+[node name="Camera2D" parent="player2" index="3"]
+enabled = false
+
+[node name="AnimationPlayer" parent="player2" index="5"]
+speed_scale = 0.506
+
+[node name="player" parent="." instance=ExtResource("3_bqqt6")]
+position = Vector2(922, 500)
+scale = Vector2(0.5, 0.5)
+script = null
+
+[node name="Camera2D" parent="player" index="3"]
+enabled = false
+
+[node name="AnimationPlayer" parent="player" index="5"]
+speed_scale = 0.631
+
+[editable path="player2"]
+[editable path="player"]

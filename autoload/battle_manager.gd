@@ -2,12 +2,15 @@ extends Node
 
 signal battle_started(entity1, entity2)
 signal battle_ended(winner, loser)
+signal player_input_received()
 
 var battle_distance: float = 1000
 var dice = DiceEngine.new()
 var roll_amount: int = 1
 
 var entities: Array = []
+var input_allowed : bool = false
+
 
 func fill_entities(ents: Array) -> void:
 	for i in ents:
@@ -51,28 +54,41 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 		
 		
 		if roll1 != roll2:
-			entity1.dice.show()
-			entity2.dice.show()
+				
 			entity1.hp_bar.show()
 			entity2.hp_bar.show()
 			entity1.label.show()
 			entity2.label.show()
+
+			if !entity1.is_player:
+				entity1.dice.show()
+			elif !entity2.is_player:
+				entity2.dice.show()
+				
 			await get_tree().create_timer(.25).timeout
 			
 			var round_winner = entity1 if roll1 > roll2 else entity2
 			var round_loser = entity1 if round_winner == entity2 else entity1
-			if entity1.is_player or entity2.is_player:
-				await get_player_input()
-				print("sefsdfsdf")
 			
 			var dice_type1 = entity1.dice.throw_dice(roll1)
 			var dice_type2 = entity2.dice.throw_dice(roll2)
 			
 			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
 			
+			if entity1.is_player or entity2.is_player:
+				var player = entity1 if entity1.is_player else entity2
+				input_allowed = true
+				player.dice_selection.show()
+				await self.player_input_received
+				player.dice_selection.hide()
+				player.dice.show()
+				
 			entity1.attack() if roll1 > roll2 else entity2.attack()
 			entity1.get_damage(roll2 - roll1) if roll1 < roll2 else entity2.get_damage(roll1 - roll2)
 			await get_tree().create_timer(0.75).timeout
+			
+			if entity1.is_player or entity2.is_player:
+				input_allowed = false
 			
 			entity1.dice.hide()
 			entity2.dice.hide()
@@ -104,15 +120,31 @@ func set_abilities(dice_1 : int, dice_2 : int, entity1 : Entity, entity2 : Entit
 
 	if dice_1 == 1:
 		entity1.set_shield(roll1)
+		
+	elif dice_1 == 2:
+		pass
+
+	#elif dice_1 == 2:
+		#pass
+	#elif dice_1 == 2:
+		#pass
+	#elif dice_1 == 2:
+		#pass
+
 	if dice_2 == 1:
 		entity2.set_shield(roll2)
+		
+	elif dice_2 == 2:
+		pass
+
+	#elif dice_2 == 2:
+		#pass
+	#elif dice_2 == 2:
+		#pass
+	#elif dice_2 == 2:
+		#pass
+
 	
-	
-func get_player_input() -> bool:
-	if Input.is_action_just_pressed("ui_accept"):
-		return true
-	else:
-		return false
-	
-	
-	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("LMB") and input_allowed:
+		player_input_received.emit()

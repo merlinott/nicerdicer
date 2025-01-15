@@ -4,7 +4,7 @@ extends Node2D
 const ENEMY = preload("res://scenes/enemy.tscn")
 
 func _ready() -> void:
-	spanw_enemies(10)
+	spanw_enemies(20)
 	
 func _process(delta: float) -> void:
 	await get_tree().create_timer(.1).timeout
