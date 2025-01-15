@@ -2,7 +2,7 @@ extends Node
 
 signal battle_started(entity1, entity2)
 signal battle_ended(winner, loser)
-signal player_input_received()
+signal player_input_received
 
 var battle_distance: float = 1000
 var dice = DiceEngine.new()
@@ -12,6 +12,9 @@ var entities: Array = []
 var input_allowed : bool = false
 
 var player : CharacterBody2D 
+var player_roll : int = 0
+var player_dice_type : int = 0
+
 
 func fill_entities(ents: Array) -> void:
 	for i in ents:
@@ -76,10 +79,26 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 				input_allowed = true
 				player.set_dice_selection()
 				player.dice_selection.show()
+				
 				await self.player_input_received
+				
+				if entity1.is_player:
+					roll1 = player_roll
+					dice_type1 = player_dice_type
+					entity1.dice.set_dice_values(roll1, dice_type1)
+					print("num: ", entity1.dice.sprite.animation, "type: ", entity1.dice.sprite.frame)
+					entity1.dice.show()
+					
+				if entity2.is_player:
+					roll2 = player_roll
+					dice_type2 = player_dice_type
+					entity2.dice.set_dice_values(roll2, dice_type2)
+					print("num: ", entity2.dice.sprite.animation, "type: ", entity2.dice.sprite.frame)
+					entity2.dice.show()
+					
+				
 				player.dice_selection.hide()
 				player.dice.show()
-				
 			
 			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
 			
@@ -146,5 +165,6 @@ func set_abilities(dice_1 : int, dice_2 : int, entity1 : Entity, entity2 : Entit
 
 
 func select_dice(dice_data : Array):
-	player.dice
+	player_roll = dice_data[0]
+	player_dice_type = dice_data[1]
 	player_input_received.emit()

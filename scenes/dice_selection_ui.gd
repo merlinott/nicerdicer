@@ -29,7 +29,7 @@ func get_dice(input, num : int):
 		0:
 			BattleManager.select_dice(dice_01_value)
 		1:
-			BattleManager.select_dice(dice_01_value)
+			BattleManager.select_dice(dice_02_value)
 		2:
-			BattleManager.select_dice(dice_01_value)
+			BattleManager.select_dice(dice_03_value)
 			

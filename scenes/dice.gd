@@ -18,3 +18,11 @@ func get_dice_texture(animation_name : int, frame_index : int) -> Texture2D:
 	var current_texture: Texture2D = sprite_frames.get_frame_texture(str(animation_name), frame_index)
 	
 	return current_texture
+
+
+func set_dice_values(anim : int, type : int) -> void:
+	if anim == 0:
+		return
+	sprite.animation = str(anim)
+	sprite.frame = type
+	
