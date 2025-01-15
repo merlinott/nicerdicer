@@ -11,6 +11,7 @@ var roll_amount: int = 1
 var entities: Array = []
 var input_allowed : bool = false
 
+var player : CharacterBody2D 
 
 func fill_entities(ents: Array) -> void:
 	for i in ents:
@@ -62,27 +63,26 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 
 			if !entity1.is_player:
 				entity1.dice.show()
-			elif !entity2.is_player:
+			if !entity2.is_player:
 				entity2.dice.show()
 				
 			await get_tree().create_timer(.25).timeout
 			
-			var round_winner = entity1 if roll1 > roll2 else entity2
-			var round_loser = entity1 if round_winner == entity2 else entity1
-			
-			var dice_type1 = entity1.dice.throw_dice(roll1)
-			var dice_type2 = entity2.dice.throw_dice(roll2)
-			
-			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
+			var dice_type1 = entity1.dice.throw_dice(roll1, entity1.dice_deck)
+			var dice_type2 = entity2.dice.throw_dice(roll2, entity2.dice_deck)
 			
 			if entity1.is_player or entity2.is_player:
-				var player = entity1 if entity1.is_player else entity2
+				player = entity1 if entity1.is_player else entity2
 				input_allowed = true
+				player.set_dice_selection()
 				player.dice_selection.show()
 				await self.player_input_received
 				player.dice_selection.hide()
 				player.dice.show()
 				
+			
+			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
+			
 			entity1.attack() if roll1 > roll2 else entity2.attack()
 			entity1.get_damage(roll2 - roll1) if roll1 < roll2 else entity2.get_damage(roll1 - roll2)
 			await get_tree().create_timer(0.75).timeout
@@ -144,7 +144,7 @@ func set_abilities(dice_1 : int, dice_2 : int, entity1 : Entity, entity2 : Entit
 	#elif dice_2 == 2:
 		#pass
 
-	
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("LMB") and input_allowed:
-		player_input_received.emit()
+
+func select_dice(dice_data : Array):
+	player.dice
+	player_input_received.emit()

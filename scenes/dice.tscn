@@ -89,4 +89,9 @@ script = ExtResource("1_pb8pk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_skxya")
-animation = &"6"
+animation = &"2"
+frame = 1
+frame_progress = 0.8563
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(600, 360)

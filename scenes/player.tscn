@@ -241,8 +241,9 @@ _data = {
 &"walk": SubResource("Animation_g2els")
 }
 
-[node name="player" type="CharacterBody2D" groups=["entity"]]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("dice_selection") groups=["entity"]]
 script = ExtResource("1_g2els")
+dice_selection = NodePath("CanvasLayer2/DiceSelection")
 speed = 3500.0
 is_player = true
 

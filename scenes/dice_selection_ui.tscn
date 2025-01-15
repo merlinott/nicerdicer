@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx2rv6ej2x3dk"]
+[gd_scene load_steps=4 format=3 uid="uid://cx2rv6ej2x3dk"]
 
+[ext_resource type="Script" uid="uid://bs28xihc2iont" path="res://scenes/dice_selection_ui.gd" id="1_qxxf1"]
 [ext_resource type="Texture2D" uid="uid://b3pb7vq22oufl" path="res://assets/dice/dice_01_normal.png" id="1_t6qo0"]
 [ext_resource type="Script" uid="uid://4rbtdr8ojnok" path="res://ui_animation_component.gd" id="2_qxxf1"]
 
@@ -17,6 +18,7 @@ grow_vertical = 2
 scale = Vector2(0.25, 0.25)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("1_qxxf1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -70,41 +72,41 @@ theme_override_constants/separation = 60
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
-script = ExtResource("2_qxxf1")
-from_center = true
-hover_scale = Vector2(1.25, 1.25)
-anim_duration = 0.25
-transition_type = 7
-
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("1_t6qo0")
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer2"]
+[node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureRect"]
 script = ExtResource("2_qxxf1")
 from_center = true
 hover_scale = Vector2(1.25, 1.25)
 anim_duration = 0.25
 transition_type = 7
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
 texture = ExtResource("1_t6qo0")
 
-[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer3"]
+[node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer2/TextureRect"]
 script = ExtResource("2_qxxf1")
 from_center = true
 hover_scale = Vector2(1.25, 1.25)
 anim_duration = 0.25
 transition_type = 7
 
+[node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer3"]
 layout_mode = 2
 texture = ExtResource("1_t6qo0")
+
+[node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer3/TextureRect"]
+script = ExtResource("2_qxxf1")
+from_center = true
+hover_scale = Vector2(1.25, 1.25)
+anim_duration = 0.25
+transition_type = 7

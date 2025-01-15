@@ -5,22 +5,39 @@ extends CharacterBody2D
 @onready var damage_numbers: Control = $DamageNumbers
 @onready var dice: Node2D = $Dice
 @onready var hp_bar: Control = $hp_bar
-
-
-@export var speed : float = 3000
 @onready var sprite: Sprite2D = $Sprite2D
 
+@export var dice_selection: Control
+@export var speed : float = 3000
 @export var is_player : bool = false
+
 var is_dead = false
 var is_attacking = false
 var sides : int = 6
 var max_life : int = 0
 var life : int = 0
 
-var shield : bool = false#devides the damage by 2 
+var shield : bool = false
 var current_shield : int = 0
 
 var idle : bool = true
+
+var dice_deck : Array = [
+	[1,[0,1]],
+	[2,[0,1]],
+	[3,[0,1]],
+	[4,[0,1]],
+	[5,[0,1]],
+	[6,[0,1]],
+]
+
+
+func set_dice_selection():
+	for i in 3:
+		var dice_number = dice_deck.pick_random()[0]
+		var dice_type = dice_deck[0][1].pick_random()
+		dice_selection.set_dice_selection(i, dice.get_dice_texture(dice_number, dice_type), [dice_number,dice_type])
+
 
 
 func _ready() -> void:
