@@ -50,23 +50,47 @@ position = Vector2(663, -1168)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-19384, 1823)
+position = Vector2(-40605, 2710)
 shape = SubResource("RectangleShape2D_k0juu")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(20488, 5969)
+position = Vector2(42337, 6844)
 shape = SubResource("RectangleShape2D_71j4m")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(60, 14494)
+position = Vector2(-216, 35880)
 shape = SubResource("RectangleShape2D_qfnet")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(-1000, -15045)
+position = Vector2(-3978, -34721)
 shape = SubResource("RectangleShape2D_i7141")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(100, 250)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -125.0
+offset_right = 10.0
+offset_bottom = 125.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Fickian : 10
+Jan : 100
+Fidfgckian : 22
+Ican : 10
+Kaian : 5
+"

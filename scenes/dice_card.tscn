@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://btx5b4xkqcivh"]
+[gd_scene load_steps=5 format=3 uid="uid://btx5b4xkqcivh"]
 
 [ext_resource type="Texture2D" uid="uid://eokswhfulpbq" path="res://assets/gui/card.png" id="1_0ab4s"]
 [ext_resource type="Script" uid="uid://4rbtdr8ojnok" path="res://ui_animation_component.gd" id="2_6dta8"]
+[ext_resource type="Script" uid="uid://dl40hsvmqesjj" path="res://scenes/dice_card.gd" id="2_g305l"]
 [ext_resource type="Texture2D" uid="uid://b3pb7vq22oufl" path="res://assets/dice/dice_01_normal.png" id="3_g305l"]
 
 [node name="TextureRect" type="TextureRect"]
@@ -20,6 +21,8 @@ scale = Vector2(0.1, 0.1)
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture = ExtResource("1_0ab4s")
+script = ExtResource("2_g305l")
+dice_sprites = Array[Texture2D]([null, null, null, null, null, null])
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("2_6dta8")
@@ -64,8 +67,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 0
 theme_override_font_sizes/font_size = 50
-text = "Diese Karte kann 
-überhaupt 
-gar nichte eigentlich "
+text = "
+Gain a shield equal to the rolled number."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

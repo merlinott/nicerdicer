@@ -25,11 +25,12 @@ func set_dice_selection(i : int, dice_texture : Texture, data : Array):
 
 	
 func get_dice(input, num : int):
-	match num:
-		0:
-			BattleManager.select_dice(dice_01_value)
-		1:
-			BattleManager.select_dice(dice_02_value)
-		2:
-			BattleManager.select_dice(dice_03_value)
+	if input is InputEventMouseButton and input.pressed and input.button_index == MOUSE_BUTTON_LEFT:
+		match num:
+			0:
+				BattleManager.select_dice(dice_01_value)
+			1:
+				BattleManager.select_dice(dice_02_value)
+			2:
+				BattleManager.select_dice(dice_03_value)
 			

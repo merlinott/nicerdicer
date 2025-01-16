@@ -1,27 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsw8luwju64pn"]
+[gd_scene load_steps=3 format=3 uid="uid://dsw8luwju64pn"]
 
-[ext_resource type="PackedScene" uid="uid://btx5b4xkqcivh" path="res://scenes/dice_card.tscn" id="1_gq4au"]
+[ext_resource type="Script" uid="uid://dn5d3du4tv7cv" path="res://scenes/cards_ui.gd" id="1_gq4au"]
+[ext_resource type="PackedScene" uid="uid://qb01q6x1cnxv" path="res://scenes/upgrade_cards/shield_dice_card.tscn" id="2_mxbs1"]
 
 [node name="Cards" type="Control"]
 layout_mode = 3
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = -142.0
-offset_right = 25.0
-offset_bottom = -142.0
+anchor_bottom = 0.5
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 scale = Vector2(0.25, 0.25)
+script = ExtResource("1_gq4au")
+cards_scenes = Array[PackedScene]([ExtResource("2_mxbs1")])
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -568.5
+offset_right = 420.0
+offset_bottom = 568.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
@@ -34,12 +39,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 alignment = 1
-
-[node name="TextureRect" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_gq4au")]
-layout_mode = 2
-
-[node name="TextureRect2" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_gq4au")]
-layout_mode = 2
-
-[node name="TextureRect3" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_gq4au")]
-layout_mode = 2

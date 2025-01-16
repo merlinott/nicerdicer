@@ -1,0 +1,24 @@
+[gd_scene load_steps=8 format=3 uid="uid://qb01q6x1cnxv"]
+
+[ext_resource type="PackedScene" uid="uid://btx5b4xkqcivh" path="res://scenes/dice_card.tscn" id="1_3qtvw"]
+[ext_resource type="Texture2D" uid="uid://x1n1n7qmo33x" path="res://assets/dice/dice_06_shield.png" id="2_5h0vr"]
+[ext_resource type="Texture2D" uid="uid://dy5pabg1ujn3y" path="res://assets/dice/dice_01_shield.png" id="2_suhv5"]
+[ext_resource type="Texture2D" uid="uid://1x85yspxetfb" path="res://assets/dice/dice_02_shield.png" id="3_iqyoe"]
+[ext_resource type="Texture2D" uid="uid://bri6ror4gc2e3" path="res://assets/dice/dice_03_shield.png" id="4_vcykx"]
+[ext_resource type="Texture2D" uid="uid://bmwmjccipfm5" path="res://assets/dice/dice_04_shield.png" id="5_nq1p2"]
+[ext_resource type="Texture2D" uid="uid://bvotcwoatjb5k" path="res://assets/dice/dice_05_shield.png" id="6_q0ose"]
+
+[node name="ShieldDiceCard" instance=ExtResource("1_3qtvw")]
+dice_sprites = Array[Texture2D]([ExtResource("2_suhv5"), ExtResource("3_iqyoe"), ExtResource("4_vcykx"), ExtResource("5_nq1p2"), ExtResource("6_q0ose"), ExtResource("2_5h0vr")])
+upgrade_index = 1
+
+[node name="TextureRect" parent="MarginContainer/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(350, 350)
+texture = ExtResource("2_5h0vr")
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="2"]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "Gain a shield equal 
+to the rolled number."

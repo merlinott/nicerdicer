@@ -1,13 +1,15 @@
 class_name Entity
 extends CharacterBody2D
-@onready var label: Label = $Label
+@onready var label: Label = %Label
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var damage_numbers: Control = $DamageNumbers
 @onready var dice: Node2D = $Dice
 @onready var hp_bar: Control = $hp_bar
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var unique_name: Label = $Name
 
 @export var dice_selection: Control
+@export var card_selection: Control
 @export var speed : float = 3000
 @export var is_player : bool = false
 
@@ -23,29 +25,30 @@ var current_shield : int = 0
 var idle : bool = true
 
 var dice_deck : Array = [
-	[1,[0,1]],
-	[2,[0,1]],
-	[3,[0,1]],
-	[4,[0,1]],
-	[5,[0,1]],
-	[6,[0,1]],
+	[1,[0]],
+	[2,[0]],
+	[3,[0]],
+	[4,[0]],
+	[5,[0]],
+	[6,[0]],
 ]
 
 
 func set_dice_selection():
 	for i in 3:
 		var dice_number = dice_deck.pick_random()[0]
-		var dice_type = dice_deck[0][1].pick_random()
+		var dice_type = dice_deck[dice_number-1][1].pick_random()
 		dice_selection.set_dice_selection(i, dice.get_dice_texture(dice_number, dice_type), [dice_number,dice_type])
-
 
 
 func _ready() -> void:
 	animation_player.play("RESET")
 	entity_ready()
 	max_life = sides
+	unique_name.text = BattleManager.get_unique_name()
 	if is_player: 
-		max_life *= 2
+		BattleManager.picked_upgrade.connect(set_upgrade)
+		
 	await  get_tree().create_timer(2).timeout
 	idle = false
 	animation_player.play("walk")
@@ -110,12 +113,15 @@ func won_fight():
 	animation_player.play("walk")
 	hp_bar.reset_hp_bar(max_life)
 	if is_player:
+		card_selection.card_menu_setup()
 		var value = %Camera2D.zoom / 2
 		tween_cam(value)
-		
+
+
 func reset():
 	label.modulate = Color.WHITE
 	shield = false
+
 
 func end_round():
 	hp_bar.remove_shield()
@@ -134,3 +140,7 @@ func _process(delta: float) -> void:
 func tween_cam(value):
 	var t = create_tween()
 	t.tween_property(%Camera2D,"zoom",value,.2)
+
+
+func set_upgrade(num : int,index : int) -> void:
+	dice_deck[num-1][1].append(index)
