@@ -17,6 +17,10 @@ var player : CharacterBody2D
 var player_roll : int = 0
 var player_dice_type : int = 0
 
+var damage_multiplier1 : int = 1
+var damage_multiplier2 : int = 1
+
+
 
 func fill_entities(ents: Array) -> void:
 	for i in ents:
@@ -27,6 +31,8 @@ func fill_entities(ents: Array) -> void:
 	for i in 10:
 		points += randi_range(0,10)
 		var e = entities.pick_random()
+		if e.is_player:
+			return
 		e.max_life += points
 		
 		
@@ -119,12 +125,18 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 			
 			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
 			
+			roll1 *= damage_multiplier1
+			roll2 *= damage_multiplier2
+			
 			entity1.attack() if roll1 > roll2 else entity2.attack()
 			entity1.get_damage(roll2 - roll1) if roll1 < roll2 else entity2.get_damage(roll1 - roll2)
 			await get_tree().create_timer(0.5).timeout
 			
 			if entity1.is_player or entity2.is_player:
 				input_allowed = false
+			
+			damage_multiplier1 = 1
+			damage_multiplier2 = 1
 			
 			entity1.dice.hide()
 			entity2.dice.hide()
@@ -148,7 +160,7 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 	winner.won_fight()
 	if !winner.is_player:
 		winner.is_attacking = false
-		winner.set_upgrade(randi_range(1, 6), 1)
+		winner.set_upgrade(randi_range(1, 6), randi_range(1,2))
 	if !loser.is_player:
 		loser.is_attacking = false
 
@@ -174,7 +186,7 @@ func set_abilities(dice_1 : int, dice_2 : int, entity1 : Entity, entity2 : Entit
 		entity1.set_shield(roll1)
 		
 	elif dice_1 == 2:
-		pass
+		damage_multiplier1 = 2
 
 	#elif dice_1 == 2:
 		#pass
@@ -187,7 +199,7 @@ func set_abilities(dice_1 : int, dice_2 : int, entity1 : Entity, entity2 : Entit
 		entity2.set_shield(roll2)
 		
 	elif dice_2 == 2:
-		pass
+		damage_multiplier2 = 2
 
 	#elif dice_2 == 2:
 		#pass

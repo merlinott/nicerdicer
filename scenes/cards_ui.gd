@@ -13,7 +13,6 @@ func card_menu_setup() -> void:
 	for i in 3:
 		var card = cards_scenes.pick_random() 
 		var card_instance = card.instantiate()
-		card_instance
 		card_container.add_child(card_instance)
 	
 	show()

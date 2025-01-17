@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var top_10_label: RichTextLabel = $CanvasLayer/Label
+@onready var top_10_label: RichTextLabel = %Top10Label
 @onready var enemy_container: Node2D = $EnemyContainer
 const ENEMY = preload("res://scenes/enemy.tscn")
 var t : float = 0
@@ -41,12 +41,14 @@ func check_entity_points():
 	
 	# Create the list with colored text for players
 	var list_text = ""
+	var rank = 1
 	for enemy in top_10:
+		var rank_str = str(rank) + ". "  # Add period after number
 		if enemy.is_player:
-			list_text += "[color=#FFD700]" + str(enemy.unique_name.text) + " - " + str(enemy.max_life) + "[/color]\n"
+			list_text += "[color=#FFD700]" + rank_str + str(enemy.unique_name.text) + " - " + str(enemy.max_life) + "[/color]\n"
 		else:
-			list_text += str(enemy.unique_name.text) + " - " + str(enemy.max_life) + "\n"
-	
+			list_text += rank_str + str(enemy.unique_name.text) + " - " + str(enemy.max_life) + "\n"
+		rank += 1
 	# Set the BBCode text
 	top_10_label.text = list_text
 

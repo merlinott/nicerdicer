@@ -6,6 +6,7 @@ class_name UIAnimationComponent
 @export var hover_scale : Vector2 = Vector2(1.0, 1.0)	
 @export var anim_duration : float = 0.1
 @export var transition_type : Tween.TransitionType
+@export var default_scale_modification : bool = true
 
 var target : Control
 var default_scale : Vector2
@@ -26,7 +27,8 @@ func connect_signals()-> void:
 func setup() -> void:
 	if from_center:
 		target.pivot_offset = target.size / 2
-	default_scale = target.scale
+	if default_scale_modification:
+		default_scale = target.scale
 
 func on_hover() -> void:
 	add_twenn("scale", hover_scale, anim_duration)

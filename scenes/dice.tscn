@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://lj052lebv25p"]
+[gd_scene load_steps=21 format=3 uid="uid://lj052lebv25p"]
 
 [ext_resource type="Script" uid="uid://b2byc18b8cmil" path="res://scenes/dice.gd" id="1_pb8pk"]
 [ext_resource type="Texture2D" uid="uid://b3pb7vq22oufl" path="res://assets/dice/dice_01_normal.png" id="1_tannu"]
@@ -6,13 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://dy5pabg1ujn3y" path="res://assets/dice/dice_01_shield.png" id="3_4kp1s"]
 [ext_resource type="Texture2D" uid="uid://mpk7rlugm2wg" path="res://assets/dice/dice_03_normal.png" id="3_ocjtb"]
 [ext_resource type="Texture2D" uid="uid://bn2dfq2e1ykal" path="res://assets/dice/dice_04_normal.png" id="4_dicg2"]
+[ext_resource type="Texture2D" uid="uid://dkjisu5nqeabi" path="res://assets/dice/dice_01_x2.png" id="4_u6v4h"]
 [ext_resource type="Texture2D" uid="uid://1x85yspxetfb" path="res://assets/dice/dice_02_shield.png" id="5_nkpnt"]
 [ext_resource type="Texture2D" uid="uid://hcn50npwjlm0" path="res://assets/dice/dice_05_normal.png" id="5_pgf55"]
 [ext_resource type="Texture2D" uid="uid://cry7phwm24nm4" path="res://assets/dice/dice_06_normal.png" id="6_dlvbc"]
+[ext_resource type="Texture2D" uid="uid://cpon34hwalcht" path="res://assets/dice/dice_02_x2.png" id="7_ie753"]
 [ext_resource type="Texture2D" uid="uid://bri6ror4gc2e3" path="res://assets/dice/dice_03_shield.png" id="7_mvkvt"]
 [ext_resource type="Texture2D" uid="uid://bmwmjccipfm5" path="res://assets/dice/dice_04_shield.png" id="9_qxx4u"]
+[ext_resource type="Texture2D" uid="uid://dm3tk7h8oqkop" path="res://assets/dice/dice_03_x2.png" id="10_sffoc"]
 [ext_resource type="Texture2D" uid="uid://bvotcwoatjb5k" path="res://assets/dice/dice_05_shield.png" id="11_v1png"]
 [ext_resource type="Texture2D" uid="uid://x1n1n7qmo33x" path="res://assets/dice/dice_06_shield.png" id="13_14loa"]
+[ext_resource type="Texture2D" uid="uid://dkj8kp768wg1v" path="res://assets/dice/dice_04_x2.png" id="13_jkyey"]
+[ext_resource type="Texture2D" uid="uid://cw2sqjilaku8q" path="res://assets/dice/dice_05_x2.png" id="16_g3aec"]
+[ext_resource type="Texture2D" uid="uid://b7gwciaypv30f" path="res://assets/dice/dice_06_x2.png" id="19_tscq2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_skxya"]
 animations = [{
@@ -22,6 +28,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("3_4kp1s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u6v4h")
 }],
 "loop": true,
 "name": &"1",
@@ -33,6 +42,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("5_nkpnt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ie753")
 }],
 "loop": true,
 "name": &"2",
@@ -44,6 +56,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_mvkvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_sffoc")
 }],
 "loop": true,
 "name": &"3",
@@ -55,6 +70,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("9_qxx4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jkyey")
 }],
 "loop": true,
 "name": &"4",
@@ -66,6 +84,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("11_v1png")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_g3aec")
 }],
 "loop": true,
 "name": &"5",
@@ -77,6 +98,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("13_14loa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_tscq2")
 }],
 "loop": true,
 "name": &"6",
@@ -89,9 +113,7 @@ script = ExtResource("1_pb8pk")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 10
 sprite_frames = SubResource("SpriteFrames_skxya")
-animation = &"2"
-frame = 1
-frame_progress = 0.8563
+animation = &"6"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(600, 360)

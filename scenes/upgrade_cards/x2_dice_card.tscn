@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://cygvg5ptvwpfl"]
+
+[ext_resource type="PackedScene" uid="uid://btx5b4xkqcivh" path="res://scenes/dice_card.tscn" id="1_w8imo"]
+[ext_resource type="Texture2D" uid="uid://dkjisu5nqeabi" path="res://assets/dice/dice_01_x2.png" id="2_p2lo1"]
+[ext_resource type="Texture2D" uid="uid://cpon34hwalcht" path="res://assets/dice/dice_02_x2.png" id="3_45j8k"]
+[ext_resource type="Texture2D" uid="uid://dm3tk7h8oqkop" path="res://assets/dice/dice_03_x2.png" id="4_8dkdg"]
+[ext_resource type="Texture2D" uid="uid://dkj8kp768wg1v" path="res://assets/dice/dice_04_x2.png" id="5_is84t"]
+[ext_resource type="Texture2D" uid="uid://cw2sqjilaku8q" path="res://assets/dice/dice_05_x2.png" id="6_yfqk6"]
+[ext_resource type="Texture2D" uid="uid://b7gwciaypv30f" path="res://assets/dice/dice_06_x2.png" id="7_fck1i"]
+
+[node name="Card" instance=ExtResource("1_w8imo")]
+dice_sprites = Array[Texture2D]([ExtResource("2_p2lo1"), ExtResource("3_45j8k"), ExtResource("4_8dkdg"), ExtResource("5_is84t"), ExtResource("6_yfqk6"), ExtResource("7_fck1i")])
+upgrade_index = 2
+
+[node name="TextureRect" parent="MarginContainer/VBoxContainer" index="0"]
+texture = ExtResource("5_is84t")
+flip_v = false
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="2"]
+theme_override_font_sizes/font_size = 80
+text = "The value of 
+the roll is doubled."
