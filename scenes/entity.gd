@@ -10,6 +10,7 @@ signal collected_coin
 @onready var hp_bar: Control = $hp_bar
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var unique_name: Label = $Name
+@onready var crown: AnimatedSprite2D = $Crown
 
 @export var camera: Camera2D
 @export var dice_selection: Control
@@ -24,6 +25,8 @@ var max_life : int = 0
 var life : int = 0
 var shield : bool = false
 var current_shield : int = 0
+
+var player_won: bool = false
 
 var coins: int = 0
 	#set(value):
@@ -120,13 +123,15 @@ func set_shield(value : int):
 	hp_bar.set_hp_bar_shield(life, value)
 
 
-func won_fight():
+func won_fight(won : bool = false):
 	animation_player.play("walk")
 	hp_bar.reset_hp_bar(max_life)
 	if is_player:
-		card_selection.card_menu_setup()
+		max_life += 100
 		var value = %Camera2D.zoom / 2
 		tween_cam(value)
+		if !won:
+			card_selection.card_menu_setup()
 
 
 func reset():

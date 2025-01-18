@@ -9,6 +9,8 @@ func _ready() -> void:
 	BattleManager.picked_upgrade.connect(hide_upgrades)
 
 func card_menu_setup() -> void:
+	if BattleManager.game_ended == true:
+		return
 	for i in card_container.get_children():
 		i.queue_free()
 	for i in 3:

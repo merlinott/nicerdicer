@@ -4,9 +4,10 @@ extends Node2D
 @onready var enemy_container: Node2D = $EnemyContainer
 @onready var coin_container: Node2D = $CoinContainer
 
-
 const ENEMY = preload("res://scenes/enemy.tscn")
 const COIN = preload("res://scenes/coin.tscn")
+const DIE_SCREEN = preload("res://scenes/die_screen.tscn")
+const WIN_SCREEN = preload("res://scenes/win_screen.tscn")
 
 var enemy_t : float = 0
 var coin_t : float = 0
@@ -15,7 +16,7 @@ var leading_enemy : Entity = null
 
 func _ready() -> void:
 	spawn_enemy(250)
-	spawn_coin(50)
+	spawn_coin(200)
 	
 func _process(delta: float) -> void:
 	await get_tree().create_timer(.1).timeout
@@ -42,9 +43,22 @@ func check_entity_points():
 	# Collect all enemies in the container
 	for i in enemy_container.get_children():
 		enemies.append(i)
+		i.crown.hide()
 	
 	# Sort the enemies based on max_life in descending order
 	enemies.sort_custom(_sort_max_life_desc)
+	
+
+	enemies[0].crown.show()
+	enemies[1].crown.show()
+	enemies[2].crown.show()
+	
+	enemies[0].crown.frame = 0
+	enemies[1].crown.frame = 1
+	enemies[2].crown.frame = 2
+	
+	if enemies[0].is_player:
+		won_game(enemies[0])
 	
 	# Display the top 10 enemies
 	var top_10 = enemies.slice(0, 10)  # Get the first 10 enemies
@@ -97,3 +111,18 @@ func spawn_single_coin() -> void:
 	var instance = COIN.instantiate()
 	instance.global_position = Vector2(randf_range(-30000,30000),randf_range(-30000,30000))
 	coin_container.add_child(instance)
+	
+	
+func won_game(player):
+	BattleManager.game_ended = true
+	player.won_game()
+	await get_tree().create_timer(2).timeout
+	var win_screen = WIN_SCREEN.instantiate()
+	add_child(win_screen)
+	queue_free()
+	
+func lost_game(player):
+	var die_screen = DIE_SCREEN.instantiate()
+	add_child(die_screen)
+	queue_free()
+	

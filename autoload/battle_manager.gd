@@ -20,7 +20,7 @@ var player_dice_type : int = 0
 var damage_multiplier1 : int = 1
 var damage_multiplier2 : int = 1
 
-
+var game_ended : bool = false
 
 func fill_entities(ents: Array) -> void:
 	for i in ents:
@@ -66,6 +66,8 @@ func check_for_battles() -> void:
 
 
 func start_battle(entity1: Entity, entity2: Entity) -> Entity:
+	if game_ended:
+		return
 	entity1.is_attacking = true
 	entity2.is_attacking = true
 	
@@ -126,6 +128,9 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 				player.dice_selection.hide()
 				player.dice.show()
 				
+			if game_ended:
+				return
+				
 			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
 			
 			roll1 *= damage_multiplier1
@@ -168,10 +173,9 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 	winner.won_fight()
 	
 	if !winner.is_player:
+		winner.coins += loser.max_life
 		winner.is_attacking = false
 		winner.set_upgrade(randi_range(1, 6), randi_range(1,2))
-		
-
 
 	if !loser.is_player:
 		loser.is_attacking = false

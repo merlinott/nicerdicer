@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ehgcylhh3ww8"]
+[gd_scene load_steps=22 format=3 uid="uid://ehgcylhh3ww8"]
 
 [ext_resource type="Script" uid="uid://dn0dwmkaeyku4" path="res://scenes/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dgd0to27ulspj" path="res://assets/shaddow.png" id="2_qhqgy"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dsw8luwju64pn" path="res://scenes/cards_ui.tscn" id="8_smehm"]
 [ext_resource type="PackedScene" uid="uid://cx2rv6ej2x3dk" path="res://scenes/dice_selection_ui.tscn" id="9_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://cl1xxiui4f2jd" path="res://assets/coiner.png" id="10_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://b5y0eje6j72my" path="res://assets/crown_01.png" id="12_f1ej7"]
+[ext_resource type="Texture2D" uid="uid://xatspavrtatl" path="res://assets/crown_02.png" id="13_oprun"]
+[ext_resource type="Texture2D" uid="uid://dvat8c4v0sf5f" path="res://assets/crown_03.png" id="14_a8ls1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 264.613
@@ -243,6 +246,23 @@ _data = {
 &"walk": SubResource("Animation_g2els")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_qfm1y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_f1ej7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_oprun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_a8ls1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "dice_selection", "card_selection") groups=["entity"]]
 script = ExtResource("1_g2els")
 camera = NodePath("Camera2D")
@@ -292,20 +312,6 @@ offset_bottom = -1024.0
 visible = false
 offset_top = -420.0
 offset_bottom = -420.0
-
-[node name="Label" type="Label" parent="hp_bar"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = -68.625
-offset_top = -51.125
-offset_right = -43.625
-offset_bottom = -20.125
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 22
-text = "10"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("8_d2wvv")
@@ -392,3 +398,22 @@ theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+z_index = 6
+offset_left = -621.0
+offset_top = -851.0
+offset_right = -279.0
+offset_bottom = -578.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 150
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crown" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -771)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_qfm1y")

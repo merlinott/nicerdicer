@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://775yr4nqj4ib"]
+[gd_scene load_steps=18 format=3 uid="uid://775yr4nqj4ib"]
 
 [ext_resource type="Script" uid="uid://cmcfw3vbw08ea" path="res://scenes/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://bg3w26ehmu87a" path="res://assets/char_01.png" id="2_4ra3w"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cie52okyxge0s" path="res://assets/shield.svg" id="5_nenq2"]
 [ext_resource type="PackedScene" uid="uid://c6k6dknha5jwg" path="res://scenes/damage_numbers.tscn" id="6_xwavj"]
 [ext_resource type="PackedScene" uid="uid://b1ghn6loy26ls" path="res://scenes/hp_bar.tscn" id="7_nenq2"]
+[ext_resource type="Texture2D" uid="uid://b5y0eje6j72my" path="res://assets/crown_01.png" id="8_8qclf"]
+[ext_resource type="Texture2D" uid="uid://xatspavrtatl" path="res://assets/crown_02.png" id="9_w8i8w"]
+[ext_resource type="Texture2D" uid="uid://dvat8c4v0sf5f" path="res://assets/crown_03.png" id="10_otmr2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 294.027
@@ -239,6 +242,23 @@ _data = {
 &"walk": SubResource("Animation_g2els")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_wtq4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_8qclf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_w8i8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_otmr2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="enemy" type="CharacterBody2D" groups=["entity"]]
 collision_layer = 0
 script = ExtResource("1_md0e3")
@@ -280,20 +300,6 @@ visible = false
 offset_top = -434.0
 offset_bottom = -434.0
 
-[node name="Label" type="Label" parent="hp_bar"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = -68.75
-offset_top = -51.25
-offset_right = -43.75
-offset_bottom = -20.25
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 22
-text = "10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Name" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -327,3 +333,22 @@ theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+z_index = 6
+offset_left = -621.0
+offset_top = -851.0
+offset_right = -279.0
+offset_bottom = -578.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 150
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crown" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -771)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_wtq4b")

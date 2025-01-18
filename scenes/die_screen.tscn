@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlupjql6qgrnt"]
+
+[ext_resource type="Script" uid="uid://cxjvitu7gjbmt" path="res://scenes/end_screen.gd" id="1_67j70"]
+[ext_resource type="PackedScene" uid="uid://drcpcwvf5df4k" path="res://scenes/world.tscn" id="2_6rx8y"]
+
+[node name="LoseScreen" type="Control" node_paths=PackedStringArray("button", "button_2")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_67j70")
+button = NodePath("ColorRect/HBoxContainer/Button")
+button_2 = NodePath("ColorRect/HBoxContainer/Button2")
+world = ExtResource("2_6rx8y")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.435294, 0.384314, 0.341176, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -98.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Button2" type="Button" parent="ColorRect/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "TRY AGAIN"
+
+[node name="Button" type="Button" parent="ColorRect/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 239.0
+offset_top = 126.0
+offset_right = 1054.0
+offset_bottom = 539.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "YOU LOST!
+:( "
+horizontal_alignment = 1
+vertical_alignment = 1

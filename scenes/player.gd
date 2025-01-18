@@ -5,6 +5,10 @@ func entity_ready() -> void:
 	max_life += max_life
 
 func _physics_process(delta: float) -> void:
+	if player_won:
+		camera.zoom *= (1 + delta/2)
+		return
+	
 	if idle:
 		return
 		
@@ -32,3 +36,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite.flip_h = false
 		
+
+
+func won_game():
+	player_won = true
+	

@@ -8,5 +8,5 @@ func _ready() -> void:
 func collect(body) -> void:
 	if body is Entity:
 		if body.is_player:
-			body.coins += 1
+			body.coins += randi_range(5,10)
 			queue_free()
