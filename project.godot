@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GodotWildJam77"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="uid://g72n6qgvel16"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -40,6 +40,7 @@ folder_colors={
 [global_group]
 
 entity=""
+coin=""
 
 [input]
 

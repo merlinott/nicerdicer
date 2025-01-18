@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://lj052lebv25p"]
+[gd_scene load_steps=22 format=3 uid="uid://lj052lebv25p"]
 
 [ext_resource type="Script" uid="uid://b2byc18b8cmil" path="res://scenes/dice.gd" id="1_pb8pk"]
 [ext_resource type="Texture2D" uid="uid://b3pb7vq22oufl" path="res://assets/dice/dice_01_normal.png" id="1_tannu"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dkj8kp768wg1v" path="res://assets/dice/dice_04_x2.png" id="13_jkyey"]
 [ext_resource type="Texture2D" uid="uid://cw2sqjilaku8q" path="res://assets/dice/dice_05_x2.png" id="16_g3aec"]
 [ext_resource type="Texture2D" uid="uid://b7gwciaypv30f" path="res://assets/dice/dice_06_x2.png" id="19_tscq2"]
+[ext_resource type="AudioStream" uid="uid://er3kjdua7s3j" path="res://sound/dice_sound_01.mp3" id="20_ie753"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_skxya"]
 animations = [{
@@ -117,3 +118,6 @@ animation = &"6"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(600, 360)
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_ie753")

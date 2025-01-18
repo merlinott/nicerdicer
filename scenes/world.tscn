@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://drcpcwvf5df4k"]
+[gd_scene load_steps=12 format=3 uid="uid://drcpcwvf5df4k"]
 
 [ext_resource type="Script" uid="uid://c4wj2f4fojea1" path="res://scenes/world.gd" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://775yr4nqj4ib" path="res://scenes/enemy.tscn" id="3_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://dbh06j6vhk7o4" path="res://assets/tile_01.png" id="3_k0juu"]
 [ext_resource type="PackedScene" uid="uid://ehgcylhh3ww8" path="res://scenes/player.tscn" id="4_k0juu"]
+[ext_resource type="AudioStream" uid="uid://0lh7ujy10hbf" path="res://sound/froggy_jazz.mp3" id="5_71j4m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71j4m"]
 texture = ExtResource("3_k0juu")
@@ -39,6 +40,8 @@ layer_0/tile_data = PackedInt32Array(-131075, 1, 0, -131074, 1, 0, -131073, 1, 0
 [node name="world_cam" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(0.06, 0.06)
+
+[node name="CoinContainer" type="Node2D" parent="."]
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
@@ -120,3 +123,7 @@ Fidfgckian : 22
 Ican : 10
 Kaian : 5
 "
+
+[node name="FroggyJazz" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_71j4m")
+autoplay = true

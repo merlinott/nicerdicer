@@ -1,8 +1,70 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsw8luwju64pn"]
+[gd_scene load_steps=8 format=3 uid="uid://dsw8luwju64pn"]
 
 [ext_resource type="Script" uid="uid://dn5d3du4tv7cv" path="res://scenes/cards_ui.gd" id="1_gq4au"]
 [ext_resource type="PackedScene" uid="uid://qb01q6x1cnxv" path="res://scenes/upgrade_cards/shield_dice_card.tscn" id="2_mxbs1"]
 [ext_resource type="PackedScene" uid="uid://cygvg5ptvwpfl" path="res://scenes/upgrade_cards/x2_dice_card.tscn" id="3_wec00"]
+[ext_resource type="PackedScene" uid="uid://btx5b4xkqcivh" path="res://scenes/dice_card.tscn" id="4_37jjj"]
+
+[sub_resource type="Animation" id="Animation_1cktg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer:theme_override_constants/separation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [150]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_npwbx"]
+resource_name = "default"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer:theme_override_constants/separation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.2),
+"transitions": PackedFloat32Array(0.517633, 1, 0.517633),
+"update": 0,
+"values": [-800, 250, 150]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(0.125, 0.125),
+"update": 0,
+"values": [Vector2(1, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q86wy"]
+_data = {
+&"RESET": SubResource("Animation_1cktg"),
+&"default": SubResource("Animation_npwbx")
+}
 
 [node name="Cards" type="Control"]
 layout_mode = 3
@@ -16,6 +78,25 @@ grow_vertical = 2
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_gq4au")
 cards_scenes = Array[PackedScene]([ExtResource("2_mxbs1"), ExtResource("3_wec00")])
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = 739.5
+offset_right = 262.0
+offset_bottom = 884.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 100
+action_mode = 0
+text = "CONTINUE"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -41,3 +122,19 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 150
 alignment = 1
+
+[node name="Card" parent="MarginContainer/HBoxContainer" instance=ExtResource("4_37jjj")]
+layout_mode = 2
+
+[node name="Card2" parent="MarginContainer/HBoxContainer" instance=ExtResource("4_37jjj")]
+layout_mode = 2
+
+[node name="Card3" parent="MarginContainer/HBoxContainer" instance=ExtResource("4_37jjj")]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_q86wy")
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

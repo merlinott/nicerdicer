@@ -1,5 +1,8 @@
 class_name Entity
 extends CharacterBody2D
+
+signal collected_coin
+
 @onready var label: Label = %Label
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var damage_numbers: Control = $DamageNumbers
@@ -8,6 +11,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var unique_name: Label = $Name
 
+@export var camera: Camera2D
 @export var dice_selection: Control
 @export var card_selection: Control
 @export var speed : float = 3000
@@ -18,9 +22,14 @@ var is_attacking = false
 var sides : int = 6
 var max_life : int = 0
 var life : int = 0
-
 var shield : bool = false
 var current_shield : int = 0
+
+var coins: int = 0
+	#set(value):
+		#coins += value
+		#if is_player:
+			#collected_coin.emit(coins)
 
 var idle : bool = true
 
@@ -46,8 +55,10 @@ func _ready() -> void:
 	entity_ready()
 	max_life = sides
 	unique_name.text = BattleManager.get_unique_name()
+	
 	if is_player: 
 		BattleManager.picked_upgrade.connect(set_upgrade)
+		max_life *= 2
 		
 	await  get_tree().create_timer(2).timeout
 	idle = false
@@ -128,6 +139,9 @@ func end_round():
 
 
 func _process(delta: float) -> void:
+	
+	%DebugLabel.text = ("is attacking = " + str(is_attacking))
+	
 	if is_attacking:
 		if shield:
 			label.text = str(life + current_shield)

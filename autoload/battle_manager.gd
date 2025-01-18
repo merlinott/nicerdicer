@@ -28,8 +28,8 @@ func fill_entities(ents: Array) -> void:
 	
 	var points : int = 0
 	
-	for i in 10:
-		points += randi_range(0,10)
+	for i in 30:
+		points += randi_range(0,5)
 		var e = entities.pick_random()
 		if e.is_player:
 			return
@@ -66,11 +66,9 @@ func check_for_battles() -> void:
 
 
 func start_battle(entity1: Entity, entity2: Entity) -> Entity:
-	entities.erase(entity1)
-	entities.erase(entity2)
-	
 	entity1.is_attacking = true
 	entity2.is_attacking = true
+	
 	entity1.fight_setup(entity2)
 	entity2.fight_setup(entity1)
 	entity1.unique_name.hide()
@@ -101,12 +99,17 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 			
 			if entity1.is_player or entity2.is_player:
 				player = entity1 if entity1.is_player else entity2
+				var enemy = entity2 if entity1.is_player else entity1
+				
+				var t = create_tween()
+				t.tween_property(enemy,"global_position", player.global_position + Vector2(1400,0), .5)
+				await t.finished
+				
 				input_allowed = true
 				player.set_dice_selection()
 				player.dice_selection.show()
 				
 				await self.player_input_received
-				
 				if entity1.is_player:
 					roll1 = player_roll
 					dice_type1 = player_dice_type
@@ -122,7 +125,7 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 				
 				player.dice_selection.hide()
 				player.dice.show()
-			
+				
 			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
 			
 			roll1 *= damage_multiplier1
@@ -130,7 +133,13 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 			
 			entity1.attack() if roll1 > roll2 else entity2.attack()
 			entity1.get_damage(roll2 - roll1) if roll1 < roll2 else entity2.get_damage(roll1 - roll2)
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(randf_range(.4,1)).timeout
+			
+			if entity1.is_player:
+				entity1.coins +=1  
+			else:
+				entity2.coins +=1
+			
 			
 			if entity1.is_player or entity2.is_player:
 				input_allowed = false
@@ -156,11 +165,14 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 	loser.unique_name.show()
 	winner.unique_name.show()
 	
-	
 	winner.won_fight()
+	
 	if !winner.is_player:
 		winner.is_attacking = false
 		winner.set_upgrade(randi_range(1, 6), randi_range(1,2))
+		
+
+
 	if !loser.is_player:
 		loser.is_attacking = false
 
@@ -169,6 +181,7 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 	
 	if points == 0:
 		points = 1
+		
 	winner.max_life += points
 	
 	loser.is_dead = true

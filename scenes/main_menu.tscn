@@ -1,10 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://g72n6qgvel16"]
+[gd_scene load_steps=12 format=3 uid="uid://g72n6qgvel16"]
 
 [ext_resource type="Texture2D" uid="uid://dw602tyom8s4c" path="res://assets/menu_ui/bg_v1.png" id="1_ekxnf"]
+[ext_resource type="Script" uid="uid://0bjmjs4i2fee" path="res://scenes/main_menu.gd" id="1_oa1go"]
 [ext_resource type="Texture2D" uid="uid://uvnqf4wae7g5" path="res://assets/menu_ui/start_button.png" id="2_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://drcpcwvf5df4k" path="res://scenes/world.tscn" id="2_tbmy8"]
 [ext_resource type="Script" uid="uid://4rbtdr8ojnok" path="res://ui_animation_component.gd" id="3_8ln24"]
 [ext_resource type="PackedScene" uid="uid://ehgcylhh3ww8" path="res://scenes/player.tscn" id="3_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://bg3w26ehmu87a" path="res://assets/char_01.png" id="4_wu84c"]
+[ext_resource type="Texture2D" uid="uid://dwhq0j4n8vpgr" path="res://assets/logo.png" id="6_rtw2f"]
+
+[sub_resource type="Animation" id="Animation_oa1go"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="Animation" id="Animation_rtw2f"]
+resource_name = "new_animation"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.55, 0.55), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbmy8"]
+_data = {
+&"RESET": SubResource("Animation_oa1go"),
+&"new_animation": SubResource("Animation_rtw2f")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,6 +54,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_oa1go")
+world = ExtResource("2_tbmy8")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -25,10 +68,10 @@ texture = ExtResource("1_ekxnf")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 52.0
-offset_top = 84.0
-offset_right = 634.0
-offset_bottom = 236.0
+offset_left = 54.0
+offset_top = 514.0
+offset_right = 636.0
+offset_bottom = 666.0
 texture = ExtResource("2_bqqt6")
 
 [node name="Node" type="Node" parent="TextureRect2"]
@@ -49,8 +92,21 @@ texture = ExtResource("4_wu84c")
 [node name="Camera2D" parent="player2" index="3"]
 enabled = false
 
-[node name="AnimationPlayer" parent="player2" index="5"]
+[node name="AnimationPlayer" parent="player2" index="4"]
 speed_scale = 0.506
+
+[node name="DamageNumbers" parent="player2" index="7"]
+visible = false
+
+[node name="CanvasLayer" parent="player2" index="9"]
+visible = false
+script = null
+
+[node name="Name" parent="player2" index="10"]
+visible = false
+
+[node name="DebugLabel" parent="player2" index="11"]
+visible = false
 
 [node name="player" parent="." instance=ExtResource("3_bqqt6")]
 position = Vector2(922, 500)
@@ -60,8 +116,35 @@ script = null
 [node name="Camera2D" parent="player" index="3"]
 enabled = false
 
-[node name="AnimationPlayer" parent="player" index="5"]
+[node name="AnimationPlayer" parent="player" index="4"]
 speed_scale = 0.631
+
+[node name="DamageNumbers" parent="player" index="7"]
+visible = false
+
+[node name="CanvasLayer" parent="player" index="9"]
+visible = false
+script = null
+
+[node name="Name" parent="player" index="10"]
+visible = false
+
+[node name="DebugLabel" parent="player" index="11"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(332.045, 244.63)
+rotation = -0.153589
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_rtw2f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tbmy8")
+}
+autoplay = "new_animation"
+
+[connection signal="gui_input" from="TextureRect2" to="." method="_on_texture_rect_2_gui_input"]
 
 [editable path="player2"]
 [editable path="player"]

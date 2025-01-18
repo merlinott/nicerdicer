@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://btx5b4xkqcivh"]
+[gd_scene load_steps=6 format=3 uid="uid://btx5b4xkqcivh"]
 
 [ext_resource type="Texture2D" uid="uid://eokswhfulpbq" path="res://assets/gui/card.png" id="1_0ab4s"]
 [ext_resource type="Script" uid="uid://4rbtdr8ojnok" path="res://ui_animation_component.gd" id="2_6dta8"]
 [ext_resource type="Script" uid="uid://dl40hsvmqesjj" path="res://scenes/dice_card.gd" id="2_g305l"]
 [ext_resource type="Texture2D" uid="uid://b3pb7vq22oufl" path="res://assets/dice/dice_01_normal.png" id="3_g305l"]
+[ext_resource type="Texture2D" uid="uid://cl1xxiui4f2jd" path="res://assets/coiner.png" id="5_g305l"]
 
 [node name="Card" type="Control"]
 custom_minimum_size = Vector2(800, 1097)
@@ -39,8 +40,8 @@ texture = ExtResource("1_0ab4s")
 script = ExtResource("2_6dta8")
 from_center = true
 hover_scale = Vector2(1.1, 1.1)
-anim_duration = 0.3
-transition_type = 6
+anim_duration = 0.2
+transition_type = 3
 default_scale_modification = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -68,7 +69,6 @@ size_flags_horizontal = 4
 mouse_filter = 2
 texture = ExtResource("3_g305l")
 expand_mode = 3
-flip_v = true
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
@@ -82,6 +82,32 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 50
 text = "Gain a shield equal
 to the rolled number."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_left = 650.0
+offset_top = 955.0
+offset_right = 740.0
+offset_bottom = 1045.0
+texture = ExtResource("5_g305l")
+expand_mode = 1
+
+[node name="PriceLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 560.0
+offset_top = 935.0
+offset_right = 606.0
+offset_bottom = 1045.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 80
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -1,5 +1,8 @@
 extends Entity
 
+func entity_ready() -> void:
+	coins = 10
+	max_life += max_life
 
 func _physics_process(delta: float) -> void:
 	if idle:
@@ -10,9 +13,11 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 	
-	label.text = str(max_life)
+	label.text = str(max_life , is_attacking)
 	
-	if global_position.distance_to(get_global_mouse_position()) <=25:
+	
+	
+	if global_position.distance_to(get_global_mouse_position()) <= 100:
 		return 
 
 

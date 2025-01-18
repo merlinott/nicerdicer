@@ -14,7 +14,6 @@ upgrade_index = 2
 
 [node name="TextureRect" parent="MarginContainer/VBoxContainer" index="0"]
 texture = ExtResource("5_is84t")
-flip_v = false
 
 [node name="Label" parent="MarginContainer/VBoxContainer" index="2"]
 theme_override_font_sizes/font_size = 80

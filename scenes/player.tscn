@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ehgcylhh3ww8"]
+[gd_scene load_steps=18 format=3 uid="uid://ehgcylhh3ww8"]
 
 [ext_resource type="Script" uid="uid://dn0dwmkaeyku4" path="res://scenes/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dgd0to27ulspj" path="res://assets/shaddow.png" id="2_qhqgy"]
@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://4vw3yc8f3ldy" path="res://assets/shield.png" id="5_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://c6k6dknha5jwg" path="res://scenes/damage_numbers.tscn" id="6_tuyoq"]
 [ext_resource type="PackedScene" uid="uid://b1ghn6loy26ls" path="res://scenes/hp_bar.tscn" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://bjxcpad8lyox5" path="res://scenes/player_ui.gd" id="8_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://dsw8luwju64pn" path="res://scenes/cards_ui.tscn" id="8_smehm"]
 [ext_resource type="PackedScene" uid="uid://cx2rv6ej2x3dk" path="res://scenes/dice_selection_ui.tscn" id="9_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://cl1xxiui4f2jd" path="res://assets/coiner.png" id="10_y4r1p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 264.613
@@ -241,10 +243,11 @@ _data = {
 &"walk": SubResource("Animation_g2els")
 }
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("dice_selection", "card_selection") groups=["entity"]]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "dice_selection", "card_selection") groups=["entity"]]
 script = ExtResource("1_g2els")
-dice_selection = NodePath("CanvasLayer2/DiceSelection")
-card_selection = NodePath("CanvasLayer2/CardsSelection")
+camera = NodePath("Camera2D")
+dice_selection = NodePath("CanvasLayer/DiceSelection")
+card_selection = NodePath("CanvasLayer/CardsSelection")
 speed = 3500.0
 is_player = true
 
@@ -264,8 +267,6 @@ unique_name_in_owner = true
 zoom = Vector2(0.1, 0.1)
 position_smoothing_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_dqkch")
@@ -282,10 +283,10 @@ scale = Vector2(1.36929, 1.36929)
 texture = ExtResource("5_qlg0r")
 
 [node name="DamageNumbers" parent="." instance=ExtResource("6_tuyoq")]
-offset_left = -888.0
-offset_top = -572.0
-offset_right = -888.0
-offset_bottom = -572.0
+offset_left = -460.0
+offset_top = -1024.0
+offset_right = -460.0
+offset_bottom = -1024.0
 
 [node name="hp_bar" parent="." instance=ExtResource("7_fjrip")]
 visible = false
@@ -306,16 +307,57 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("8_d2wvv")
+entity = NodePath("..")
 
-[node name="CardsSelection" parent="CanvasLayer2" node_paths=PackedStringArray("player") instance=ExtResource("8_smehm")]
+[node name="CardsSelection" parent="CanvasLayer" node_paths=PackedStringArray("entity") instance=ExtResource("8_smehm")]
 visible = false
 size_flags_vertical = 8
-player = NodePath("../..")
+entity = NodePath("../..")
 
-[node name="DiceSelection" parent="CanvasLayer2" instance=ExtResource("9_ur7pv")]
+[node name="DiceSelection" parent="CanvasLayer" node_paths=PackedStringArray("entity") instance=ExtResource("9_ur7pv")]
 unique_name_in_owner = true
 visible = false
+entity = NodePath("../..")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("10_y4r1p")
+expand_mode = 1
+
+[node name="CurrentCoins" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Name" type="Label" parent="."]
 anchors_preset = 8
@@ -335,5 +377,18 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 44
 theme_override_font_sizes/font_size = 222
 text = "Frederik"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DebugLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -422.0
+offset_top = -779.0
+offset_right = 449.0
+offset_bottom = -574.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1

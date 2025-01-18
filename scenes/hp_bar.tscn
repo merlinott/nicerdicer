@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b0p15cs36x5l7" path="res://assets/gui/hp_bar_decor.png" id="5_mg587"]
 
 [node name="hp_bar" type="Control"]
+z_index = 5
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5

@@ -2,24 +2,37 @@ extends Node2D
 
 @onready var top_10_label: RichTextLabel = %Top10Label
 @onready var enemy_container: Node2D = $EnemyContainer
+@onready var coin_container: Node2D = $CoinContainer
+
+
 const ENEMY = preload("res://scenes/enemy.tscn")
-var t : float = 0
+const COIN = preload("res://scenes/coin.tscn")
+
+var enemy_t : float = 0
+var coin_t : float = 0
 
 var leading_enemy : Entity = null
 
 func _ready() -> void:
 	spawn_enemy(250)
+	spawn_coin(50)
 	
 func _process(delta: float) -> void:
 	await get_tree().create_timer(.1).timeout
 	BattleManager.check_for_battles()
 	
-	t += delta
-	if t > 0.250:
+	enemy_t+= delta
+	if enemy_t > 0.250:
 		spawn_single_enemy()
-		t = 0.0
+		enemy_t = 0.0
 		
-		print("TOTAL ENTITIES : ", enemy_container.get_children().size())
+
+	coin_t+= delta
+	if coin_t > 1.0:
+		spawn_single_coin()
+		coin_t = 0.0
+		
+		#print("TOTAL ENTITIES : ", enemy_container.get_children().size())
 	check_entity_points()
 
 
@@ -71,3 +84,16 @@ func spawn_single_enemy() -> void:
 	enemy_container.add_child(instance)
 
 	BattleManager.add_enemie(instance)
+
+
+func spawn_coin(num : int) -> void:
+	for i in num:
+		var instance = COIN.instantiate()
+		instance.global_position = Vector2(randf_range(-30000,30000),randf_range(-30000,30000))
+		coin_container.add_child(instance)
+
+
+func spawn_single_coin() -> void:
+	var instance = COIN.instantiate()
+	instance.global_position = Vector2(randf_range(-30000,30000),randf_range(-30000,30000))
+	coin_container.add_child(instance)

@@ -1,8 +1,91 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx2rv6ej2x3dk"]
+[gd_scene load_steps=15 format=3 uid="uid://cx2rv6ej2x3dk"]
 
 [ext_resource type="Script" uid="uid://bs28xihc2iont" path="res://scenes/dice_selection_ui.gd" id="1_qxxf1"]
 [ext_resource type="Texture2D" uid="uid://b3pb7vq22oufl" path="res://assets/dice/dice_01_normal.png" id="1_t6qo0"]
+[ext_resource type="Texture2D" uid="uid://cl1xxiui4f2jd" path="res://assets/coiner.png" id="2_ju13q"]
 [ext_resource type="Script" uid="uid://4rbtdr8ojnok" path="res://ui_animation_component.gd" id="2_qxxf1"]
+[ext_resource type="Texture2D" uid="uid://ct8tkuvbm1lrw" path="res://assets/rect34.png" id="5_71jyx"]
+[ext_resource type="Texture2D" uid="uid://b0br18oxi7f8a" path="res://assets/rect33.png" id="6_6bxy0"]
+[ext_resource type="AudioStream" uid="uid://er3kjdua7s3j" path="res://sound/dice_sound_01.mp3" id="7_6bxy0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ju13q"]
+bg_color = Color(0.509804, 0.819608, 0.811765, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ju13q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0s131"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71jyx"]
+
+[sub_resource type="Animation" id="Animation_0s131"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer:theme_override_constants/separation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [40]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/Panel:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ju13q"]
+resource_name = "default"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer:theme_override_constants/separation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1.93187, 1.93187),
+"update": 0,
+"values": [-220, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/Panel:self_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1.93187, 1.93187),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_71jyx"]
+_data = {
+&"RESET": SubResource("Animation_0s131"),
+&"default": SubResource("Animation_ju13q")
+}
 
 [node name="DiceSelection" type="Control"]
 layout_mode = 3
@@ -11,11 +94,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = 264.0
-offset_bottom = 264.0
+offset_top = 127.0
+offset_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.4, 0.4)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_qxxf1")
@@ -25,56 +108,121 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -930.0
+offset_top = -210.0
+offset_right = 930.0
+offset_bottom = 650.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(1700, 700)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ju13q")
+
+[node name="Button" type="Button" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -308.0
+offset_top = -65.0
+offset_right = 308.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 100
+text = "LEAVE FIGHT"
+
+[node name="Label" type="Label" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -850.0
+offset_top = 80.0
+offset_right = 850.0
+offset_bottom = 103.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.615686, 0.627451, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 50
+text = "and lose all money"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0.47451)
-custom_minimum_size = Vector2(100, 300)
+[node name="Price" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 1110
+alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer"]
+[node name="price_label_01" type="Label" parent="MarginContainer/VBoxContainer/Price"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "sdgfsdfasdg,da#äög,.lad#äö,gadä#ög.df
-hbsfgnsf
-"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "10"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Price/price_label_01"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = -103.0
+offset_top = 22.5
+offset_right = -3.0
+offset_bottom = 122.5
+texture = ExtResource("2_ju13q")
+expand_mode = 1
+
+[node name="price_label_02" type="Label" parent="MarginContainer/VBoxContainer/Price"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "10"
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/Price/price_label_02"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+offset_left = -104.5
+offset_top = 22.5
+offset_right = -4.50018
+offset_bottom = 122.5
+texture = ExtResource("2_ju13q")
+expand_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_constants/separation = 60
+alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ju13q")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("1_t6qo0")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/TextureRect"]
 script = ExtResource("2_qxxf1")
@@ -83,8 +231,17 @@ hover_scale = Vector2(1.25, 1.25)
 anim_duration = 0.25
 transition_type = 7
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="1" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+texture = ExtResource("5_71jyx")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0s131")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
@@ -97,12 +254,25 @@ hover_scale = Vector2(1.25, 1.25)
 anim_duration = 0.25
 transition_type = 7
 
+[node name="2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("6_6bxy0")
+expand_mode = 4
+stretch_mode = 5
+
 [node name="PanelContainer3" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_71jyx")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer3"]
+custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("1_t6qo0")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Node" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/PanelContainer3/TextureRect"]
 script = ExtResource("2_qxxf1")
@@ -110,3 +280,11 @@ from_center = true
 hover_scale = Vector2(1.25, 1.25)
 anim_duration = 0.25
 transition_type = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_71jyx")
+}
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6bxy0")
