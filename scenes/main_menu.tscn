@@ -105,9 +105,6 @@ script = null
 [node name="Name" parent="player2" index="10"]
 visible = false
 
-[node name="DebugLabel" parent="player2" index="11"]
-visible = false
-
 [node name="player" parent="." instance=ExtResource("3_bqqt6")]
 position = Vector2(922, 500)
 scale = Vector2(0.5, 0.5)
@@ -127,9 +124,6 @@ visible = false
 script = null
 
 [node name="Name" parent="player" index="10"]
-visible = false
-
-[node name="DebugLabel" parent="player" index="11"]
 visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sfx: AudioStreamPlayer = $SFX
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func throw_dice(number : int, dice_deck : Array) -> int:
@@ -18,6 +19,7 @@ func throw_dice(number : int, dice_deck : Array) -> int:
 func get_dice_texture(animation_name : int, frame_index : int) -> Texture2D:
 	var sprite_frames: SpriteFrames = sprite.get_sprite_frames()
 	var current_texture: Texture2D = sprite_frames.get_frame_texture(str(animation_name), frame_index)
+	animation_player.play("spin")
 	sfx.play()
 	return current_texture
 
