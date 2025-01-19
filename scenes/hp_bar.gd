@@ -29,11 +29,12 @@ func set_hp_bar_shield(hp : int, shield : int) -> void:
 	hp_bar_health.value = hp
 	hp_bar_shield.value = full_value
 
-func reset_hp_bar(val: int) -> void:
+func reset_hp_bar(val: int, fight_has_ended: bool = false) -> void:
 	hp_bar_shield.max_value = val
 	hp_bar_health.max_value = val
 	hp_bar_shield.value = 0
-	hp_bar_health.value = val
+	if fight_has_ended:
+		hp_bar_health.value = val
 
 func remove_shield():
 	hp_bar_shield.value = 0

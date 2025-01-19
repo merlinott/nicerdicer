@@ -22,6 +22,12 @@ var damage_multiplier2 : int = 1
 
 var game_ended : bool = false
 
+func reset_manager():
+	game_ended = false
+	entities = []
+	entity_to_fill = null
+	player = null
+
 func fill_entities(ents: Array) -> void:
 	for i in ents:
 		entities.append(i)
@@ -128,18 +134,18 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 				player.dice_selection.hide()
 				player.dice.show()
 				
-			if game_ended:
-				return
 				
 			set_abilities(dice_type1, dice_type2, entity1, entity2, roll1, roll2)
 			
 			roll1 *= damage_multiplier1
 			roll2 *= damage_multiplier2
 			
-			entity1.attack() if roll1 > roll2 else entity2.attack()
+			entity1.attack() if roll1 + entity1.current_shield > roll2 + entity2.current_shield else entity2.attack()
 			entity1.get_damage(roll2 - roll1) if roll1 < roll2 else entity2.get_damage(roll1 - roll2)
 			await get_tree().create_timer(randf_range(.4,1)).timeout
 			
+			if game_ended:
+				return
 			if entity1.is_player:
 				entity1.coins +=1  
 			else:
@@ -179,7 +185,7 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 
 	if !loser.is_player:
 		loser.is_attacking = false
-
+		
 	var points : float = loser.max_life / 10
 	points = ceil(points)
 	
@@ -192,6 +198,9 @@ func start_battle(entity1: Entity, entity2: Entity) -> Entity:
 	entities.append(winner)
 	BattleManager.erase_assigned_name(loser.unique_name.text)
 	loser.call_deferred("queue_free")
+	if loser.is_player:
+		lost_game()
+		
 	return loser
 
 
@@ -253,6 +262,16 @@ func reset_names():
 
 func erase_assigned_name(n):
 	assigned_names.erase(n)
+
+func lost_game():
+	var die_screen = load("res://scenes/die_screen.tscn")
+	var die_screen_instance = die_screen.instantiate()
+	reset_manager()
+	await get_tree().create_timer(1.0).timeout
+	get_tree().get_first_node_in_group("world").queue_free()
+	get_tree().root.add_child(die_screen_instance)
+	game_ended = true
+
 
 var unique_names = [
 	# Fantasy Names (500)

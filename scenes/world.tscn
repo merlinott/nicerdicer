@@ -27,7 +27,7 @@ size = Vector2(95718.5, 17139)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i7141"]
 size = Vector2(95718.5, 18262.5)
 
-[node name="world" type="Node2D"]
+[node name="world" type="Node2D" groups=["world"]]
 script = ExtResource("1_nnsk1")
 
 [node name="TileMap" type="TileMap" parent="."]

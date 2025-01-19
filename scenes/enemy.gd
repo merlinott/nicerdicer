@@ -21,6 +21,7 @@ const WANDER_ANGLE_CHANGE = 0.25     # How fast the wander angle changes
 func entity_ready() -> void:
 	velocity = Vector2.RIGHT.rotated(deg_to_rad(randi_range(0,360)))
 	#velocity = Vector2.UP
+	sprite.frame = randi() % 7
 
 func _physics_process(delta: float) -> void:
 	if idle:

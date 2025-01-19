@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlupjql6qgrnt"]
+[gd_scene load_steps=2 format=3 uid="uid://dlupjql6qgrnt"]
 
 [ext_resource type="Script" uid="uid://cxjvitu7gjbmt" path="res://scenes/end_screen.gd" id="1_67j70"]
-[ext_resource type="PackedScene" uid="uid://drcpcwvf5df4k" path="res://scenes/world.tscn" id="2_6rx8y"]
 
 [node name="LoseScreen" type="Control" node_paths=PackedStringArray("button", "button_2")]
 layout_mode = 3
@@ -9,7 +8,6 @@ anchors_preset = 0
 script = ExtResource("1_67j70")
 button = NodePath("ColorRect/HBoxContainer/Button")
 button_2 = NodePath("ColorRect/HBoxContainer/Button2")
-world = ExtResource("2_6rx8y")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1280, 720)

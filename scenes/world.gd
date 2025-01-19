@@ -15,6 +15,7 @@ var coin_t : float = 0
 var leading_enemy : Entity = null
 
 func _ready() -> void:
+	BattleManager.reset_manager()
 	spawn_enemy(250)
 	spawn_coin(200)
 	
@@ -118,11 +119,8 @@ func won_game(player):
 	player.won_game()
 	await get_tree().create_timer(2).timeout
 	var win_screen = WIN_SCREEN.instantiate()
-	add_child(win_screen)
+	get_tree().root.add_child(win_screen)
 	queue_free()
 	
-func lost_game(player):
-	var die_screen = DIE_SCREEN.instantiate()
-	add_child(die_screen)
-	queue_free()
+
 	

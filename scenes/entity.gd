@@ -11,6 +11,7 @@ signal collected_coin
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var unique_name: Label = $Name
 @onready var crown: AnimatedSprite2D = $Crown
+@onready var point_visuals: Label = $PointVisuals
 
 @export var camera: Camera2D
 @export var dice_selection: Control
@@ -73,6 +74,7 @@ func entity_ready() -> void:
 
 
 func fight_setup(enemy : CharacterBody2D): 
+	point_visuals.hide()
 	if is_player:
 		var value = %Camera2D.zoom * 2
 		tween_cam(value)
@@ -124,10 +126,11 @@ func set_shield(value : int):
 
 
 func won_fight(won : bool = false):
+	point_visuals.show()
 	animation_player.play("walk")
-	hp_bar.reset_hp_bar(max_life)
+	hp_bar.reset_hp_bar(max_life, true)
 	if is_player:
-		max_life += 100
+		#max_life += 100
 		var value = %Camera2D.zoom / 2
 		tween_cam(value)
 		if !won:
@@ -140,12 +143,14 @@ func reset():
 
 
 func end_round():
+	hp_bar.reset_hp_bar(max_life)
 	hp_bar.remove_shield()
 
 
 func _process(delta: float) -> void:
 	
 	%DebugLabel.text = ("is attacking = " + str(is_attacking))
+	point_visuals.text = str(max_life)
 	
 	if is_attacking:
 		if shield:
